@@ -1,9 +1,12 @@
-use rand::{
+use {
+    rand::{
     Rng,
-    distributions::{Distribution, Uniform}
+    distributions::Uniform,
+    },
+    rand_distr::{Distribution, Normal, NormalError},
 };
 
-fn main() {
+fn main() -> Result<(), NormalError>{
     let mut rng = rand::thread_rng();
     let die = Uniform::from(1..7);
 
@@ -16,6 +19,7 @@ fn main() {
     println!("Random float: {}", rng.gen::<f64>());
     println!("Integer: {}", rng.gen_range(0..10));
     println!("Float: {}", rng.gen_range(0.0..10.0));
+    // Uniform Distribution example:
     loop {
         let throw = die.sample(&mut rng);
         println!("Roll the die: {}", throw);
@@ -23,4 +27,9 @@ fn main() {
             break;
         }
     }
+    // Normal Distribution example:
+    let normal = Normal::new(2.0, 3.0)?;
+    let v = normal.sample(&mut rng);
+    println!("{} is from a N(2, 9) distribution", v);
+    Ok(()) 
 }
