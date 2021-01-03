@@ -1,7 +1,11 @@
-use rand::Rng;
+use rand::{
+    Rng,
+    distributions::{Distribution, Uniform}
+};
 
 fn main() {
     let mut rng = rand::thread_rng();
+    let die = Uniform::from(1..7);
 
     let n1: u8 = rng.gen();
     let n2: u16 = rng.gen();
@@ -12,4 +16,11 @@ fn main() {
     println!("Random float: {}", rng.gen::<f64>());
     println!("Integer: {}", rng.gen_range(0..10));
     println!("Float: {}", rng.gen_range(0.0..10.0));
+    loop {
+        let throw = die.sample(&mut rng);
+        println!("Roll the die: {}", throw);
+        if throw == 6 {
+            break;
+        }
+    }
 }
