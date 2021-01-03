@@ -1,9 +1,13 @@
 use {
     rand::{
-    Rng,
-    distributions::Uniform,
+        Rng,
+        distributions::Uniform,
     },
-    rand_distr::{Distribution, Normal, NormalError},
+    rand_distr::{
+        Distribution,
+        Normal, 
+        NormalError
+    },
 };
 
 fn main() -> Result<(), NormalError>{
