@@ -1,7 +1,10 @@
 use {
     rand::{
         Rng,
-        distributions::Uniform,
+        distributions::{
+            Uniform,
+            Standard,
+        }
     },
     rand_distr::{
         Distribution,
@@ -9,6 +12,22 @@ use {
         NormalError
     },
 };
+
+#[derive(Debug)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Distribution<Point> for Standard {
+    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> Point {
+        let (rand_x, rand_y) = rng.gen();
+        Point {
+            x: rand_x,
+            y: rand_y,
+        }
+    }
+}
 
 fn main() -> Result<(), NormalError>{
     let mut rng = rand::thread_rng();
@@ -23,6 +42,11 @@ fn main() -> Result<(), NormalError>{
     println!("Random float: {}", rng.gen::<f64>());
     println!("Integer: {}", rng.gen_range(0..10));
     println!("Float: {}", rng.gen_range(0.0..10.0));
+    // Generate values for custom types:
+    let rand_tuple = rng.gen::<(i32, bool, f64)>();
+    let rand_point: Point = rng.gen();
+    println!("Random tuple {:?}", rand_tuple);
+    println!("Randon Point: {:?}", rand_point);
     // Uniform Distribution example:
     loop {
         let throw = die.sample(&mut rng);
