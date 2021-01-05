@@ -1,5 +1,6 @@
 use {
     rand::{
+        rngs::ThreadRng,
         Rng,
         distributions::{
             Uniform,
@@ -29,9 +30,20 @@ impl Distribution<Point> for Standard {
     }
 }
 
-fn main() -> Result<(), NormalError>{
-    let mut rng = rand::thread_rng();
+fn uniform_distribution(rng: &mut ThreadRng) {
     let die = Uniform::from(1..7);
+
+    loop {
+        let throw = die.sample(rng);
+        println!("Roll the die: {}", throw);
+        if throw == 6 {
+            break;
+        }
+    }
+}
+
+fn main() -> Result<(), NormalError>{
+    let mut rng: ThreadRng = rand::thread_rng();
 
     let n1: u8 = rng.gen();
     let n2: u16 = rng.gen();
@@ -48,13 +60,7 @@ fn main() -> Result<(), NormalError>{
     println!("Random tuple {:?}", rand_tuple);
     println!("Randon Point: {:?}", rand_point);
     // Uniform Distribution example:
-    loop {
-        let throw = die.sample(&mut rng);
-        println!("Roll the die: {}", throw);
-        if throw == 6 {
-            break;
-        }
-    }
+    uniform_distribution(&mut rng);
     // Normal Distribution example:
     let normal = Normal::new(2.0, 3.0)?;
     let v = normal.sample(&mut rng);
