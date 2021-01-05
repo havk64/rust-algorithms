@@ -42,6 +42,13 @@ fn uniform_distribution(rng: &mut ThreadRng) {
     }
 }
 
+fn normal_distribution(rng: &mut ThreadRng) -> Result<(), NormalError> {
+    let normal = Normal::new(2.0, 3.0)?;
+    let v = normal.sample(rng);
+    println!("{} is from a N(2, 9) distribution", v);
+    Ok(())
+}
+
 fn main() -> Result<(), NormalError>{
     let mut rng: ThreadRng = rand::thread_rng();
 
@@ -62,8 +69,6 @@ fn main() -> Result<(), NormalError>{
     // Uniform Distribution example:
     uniform_distribution(&mut rng);
     // Normal Distribution example:
-    let normal = Normal::new(2.0, 3.0)?;
-    let v = normal.sample(&mut rng);
-    println!("{} is from a N(2, 9) distribution", v);
-    Ok(()) 
+    normal_distribution(&mut rng)?;
+    Ok(())
 }
