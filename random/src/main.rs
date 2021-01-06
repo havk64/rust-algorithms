@@ -3,6 +3,7 @@ use {
         rngs::ThreadRng,
         Rng,
         distributions::{
+            Alphanumeric,
             Uniform,
             Standard,
         }
@@ -49,6 +50,15 @@ fn normal_distribution(rng: &mut ThreadRng) -> Result<(), NormalError> {
     Ok(())
 }
 
+fn random_alphanumeric_password(rng: &mut ThreadRng) {
+    let alphanumeric_password: String = rng
+        .sample_iter(&Alphanumeric)
+        .take(30)
+        .map(char::from)
+        .collect();
+    println!("Alphanumeric password: {}", alphanumeric_password);
+}
+
 fn main() -> Result<(), NormalError>{
     let mut rng: ThreadRng = rand::thread_rng();
 
@@ -70,5 +80,6 @@ fn main() -> Result<(), NormalError>{
     uniform_distribution(&mut rng);
     // Normal Distribution example:
     normal_distribution(&mut rng)?;
+    random_alphanumeric_password(&mut rng);
     Ok(())
 }
