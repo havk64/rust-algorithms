@@ -59,6 +59,22 @@ fn random_alphanumeric_password(rng: &mut ThreadRng) {
     println!("Alphanumeric password: {}", alphanumeric_password);
 }
 
+fn random_password_from_set(rng: &mut ThreadRng) {
+    const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+                            abcdefghijklmnopqrstuvwxyz\
+                            0123456789)(*&^%$#@!~";
+    const PASSWORD_LENGTH: usize = 30;
+
+    let password: String = (0..PASSWORD_LENGTH)
+        .map(|_| {
+            let idx = rng.gen_range(0..CHARSET.len());
+            CHARSET[idx] as char
+        })
+        .collect();
+
+    println!("{}", password);
+}
+
 fn main() -> Result<(), NormalError>{
     let mut rng: ThreadRng = rand::thread_rng();
 
@@ -81,5 +97,6 @@ fn main() -> Result<(), NormalError>{
     // Normal Distribution example:
     normal_distribution(&mut rng)?;
     random_alphanumeric_password(&mut rng);
+    random_password_from_set(&mut rng);
     Ok(())
 }
