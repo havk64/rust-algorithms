@@ -44,6 +44,7 @@ fn main() {
             Person::new("Zoe".to_string(), 25)
         ]);
 
+    // Sort by age
     people.sort_by(|a,b| b.age.cmp(&a.age));
 
     assert_eq!(
