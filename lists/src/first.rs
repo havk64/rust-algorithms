@@ -1,4 +1,13 @@
-pub enum List {
+pub struct List {
+    head: Link,
+}
+enum Link {
     Empty,
-    Elem(i32, Box<List>),
+    More(Box<Node>),
+}
+struct Node {
+    elem: i32,
+    next: Link,
+}
+
 }
