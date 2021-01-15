@@ -10,4 +10,9 @@ struct Node {
     next: Link,
 }
 
+impl List {
+    pub fn new() -> Self {
+        List { head: Link::Empty }
+    }
+
 }
