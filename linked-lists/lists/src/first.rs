@@ -1,4 +1,4 @@
-use std::mem;
+use std::mem::swap;
 pub struct List {
     head: Link,
 }
@@ -21,5 +21,16 @@ impl List {
             elem,
             next: mem::replace(&mut self.head, Link::Empty),
         }));
+    }
+
+    pub fn pop(&mut self) -> Option<i32> {
+        let link = replace(&mut self.head, Link::Empty);
+        match link {
+            Link::More(node) => {
+                   self.head = node.next;
+                   return Some(node.elem);
+                },
+            Link::Empty => None
+        }
     }
 }
