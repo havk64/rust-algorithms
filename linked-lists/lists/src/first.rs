@@ -16,9 +16,9 @@ impl List {
         List { head: Link::Empty }
     }
 
-    pub fn push(&mut self, num: i32) {
         let new_node = Box::new(Node {
-            elem: num,
+    pub fn push(&mut self, elem: i32) {
+            elem,
             next: mem::replace(&mut self.head, Link::Empty),
         });
 
