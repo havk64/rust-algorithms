@@ -24,8 +24,7 @@ impl List {
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        let link = replace(&mut self.head, Link::Empty);
-        match link {
+        match replace(&mut self.head, Link::Empty) {
             Link::More(node) => {
                    self.head = node.next;
                    return Some(node.elem);
