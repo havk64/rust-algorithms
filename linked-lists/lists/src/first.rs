@@ -43,4 +43,15 @@ mod test {
         let list = List::new();
         assert_eq!(List{ head: Link::Empty }, list)
     }
+
+    #[test]
+    fn push_linked_list() {
+        let mut list = List::new();
+        list.push(6);
+        assert_eq!(List {
+            head: Link::More(Box::new(Node {
+                elem: 6,
+                next: Link::Empty,
+            }))
+        }, list) }
 }
