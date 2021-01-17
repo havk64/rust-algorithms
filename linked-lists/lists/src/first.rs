@@ -1,11 +1,17 @@
 use std::mem::swap;
+
+#[derive(Debug,PartialEq)]
 pub struct List {
     head: Link,
 }
+
+#[derive(Debug,PartialEq)]
 enum Link {
     Empty,
     More(Box<Node>),
 }
+
+#[derive(Debug,PartialEq)]
 struct Node {
     elem: i32,
     next: Link,
