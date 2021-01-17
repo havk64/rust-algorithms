@@ -33,3 +33,14 @@ impl List {
         }
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::{List, Link, Node};
+
+    #[test]
+    fn create_linked_list() {
+        let list = List::new();
+        assert_eq!(List{ head: Link::Empty }, list)
+    }
+}
