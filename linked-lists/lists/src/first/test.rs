@@ -44,15 +44,9 @@ fn push_linked_list() {
 
     assert_eq!(second, Some(6));
 
-    assert_eq!(
-        List {
-            head: Link::Empty,
-        },
-        list
-    );
+    assert_eq!(List { head: Link::Empty }, list);
 
     let last: Option<i32> = list.pop();
 
     assert_eq!(last, None);
-
 }
