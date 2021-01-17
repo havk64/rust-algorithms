@@ -1,4 +1,4 @@
-use std::mem::swap;
+use std::mem;
 
 #[derive(Debug, PartialEq)]
 pub struct List {
@@ -30,7 +30,7 @@ impl List {
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        match replace(&mut self.head, Link::Empty) {
+        match mem::replace(&mut self.head, Link::Empty) {
             Link::More(node) => {
                 self.head = node.next;
                 return Some(node.elem);
