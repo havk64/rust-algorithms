@@ -46,13 +46,13 @@ mod test {
 
     #[test]
     fn create_linked_list() {
-        let list = List::new();
+        let list: List = List::new();
         assert_eq!(List { head: Link::Empty }, list)
     }
 
     #[test]
     fn push_linked_list() {
-        let mut list = List::new();
+        let mut list: List = List::new();
 
         list.push(6);
         list.push(2);
