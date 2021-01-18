@@ -33,7 +33,7 @@ impl List {
         match mem::replace(&mut self.head, Link::Empty) {
             Link::More(node) => {
                 self.head = node.next;
-                return Some(node.elem);
+                Some(node.elem)
             }
             Link::Empty => None,
         }
