@@ -40,5 +40,15 @@ impl List {
     }
 }
 
+impl Drop for List {
+    fn drop(&mut self) {
+        let mut current_link: Link = mem::replace(&mut self.head, Link::Empty);
+
+        while let Link::More(mut boxed_node) = current_link {
+            current_link = mem::replace(&mut boxed_node.next, Link::Empty);
+        }
+    }
+}
+
 #[cfg(test)]
 mod test;
