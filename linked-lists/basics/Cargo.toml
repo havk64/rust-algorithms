@@ -1,5 +1,5 @@
 [package]
-name = "lists"
+name = "basics"
 version = "0.1.0"
 authors = ["Alexandro DE OLIVEIRA <adeoliveira@vente-privee.com>"]
 edition = "2018"
