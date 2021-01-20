@@ -2,13 +2,13 @@ use super::{List, Node};
 
 #[test]
 fn create_linked_list() {
-    let list: List<i32> = List::new();
+    let list: List<i32> = List::<i32>::new();
     assert_eq!(List { head: None }, list)
 }
 
 #[test]
 fn test_linked_list_i32() {
-    let mut list: List<i32> = List::new();
+    let mut list: List<i32> = List::<i32>::new();
 
     list.push(6);
     assert_eq!(Some(&6), list.peek());
