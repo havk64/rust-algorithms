@@ -11,7 +11,9 @@ fn test_linked_list_i32() {
     let mut list: List<i32> = List::new();
 
     list.push(6);
+    assert_eq!(Some(&6), list.peek());
     list.push(2);
+    assert_eq!(Some(&2), list.peek());
 
     assert_eq!(
         List {
