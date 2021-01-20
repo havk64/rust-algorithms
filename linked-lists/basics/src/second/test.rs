@@ -77,3 +77,26 @@ fn test_push_linked_list_string() {
         list
     )
 }
+
+#[test]
+fn test_peek_mut_method() {
+    let mut list: List<String> = List::<String>::new();
+    assert_eq!(List { head: None}, list);
+    
+    list.push("World".to_string());
+    assert_eq!(
+        List {
+            head: Some(Box::new(Node {
+                elem: "World".to_string(),
+                next: None,
+            }))
+    },
+    list);
+
+    list.peek_mut().map(|value| {
+        *value = "Hey".to_string()
+    });
+
+    assert_eq!(list.peek_mut(), Some(&mut "Hey".to_string()));
+    assert_eq!(list.pop(), Some("Hey".to_string()));
+}
