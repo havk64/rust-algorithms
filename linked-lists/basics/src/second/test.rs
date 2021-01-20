@@ -52,3 +52,28 @@ fn test_linked_list_i32() {
 
     assert_eq!(last, None);
 }
+
+#[test]
+fn test_create_linked_list_string() {
+    let list: List<String> = List::<String>::new();
+    assert_eq!(List { head: None}, list)
+}
+
+#[test]
+fn test_push_linked_list_string() {
+    let mut list: List<String> = List::<String>::new();
+    assert_eq!(List { head: None}, list);
+
+    list.push("Hello".to_string());
+    let peek = list.peek();
+    assert_eq!(Some(&"Hello".to_string()), peek);
+    assert_eq!(
+        List {
+            head: Some(Box::new(Node {
+                elem: "Hello".to_string(),
+                next: None,
+            })),
+        },
+        list
+    )
+}
