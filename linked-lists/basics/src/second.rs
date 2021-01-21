@@ -11,6 +11,8 @@ struct Node<T> {
     next: Link<T>,
 }
 
+pub struct IntoIter<T>(List<T>);
+
 impl<T> List<T> {
     pub fn new() -> Self {
         List { head: None }
@@ -35,6 +37,16 @@ impl<T> List<T> {
             &node.elem
         })
     }
+
+    pub fn peek_mut(&mut self) -> Option<&mut T> {
+        self.head.as_mut().map(|node| {
+            &mut node.elem
+        })
+    }
+
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIter(self)
+    }
 }
 
 impl<T> Drop for List<T> {
@@ -46,6 +58,14 @@ impl<T> Drop for List<T> {
         }
     }
 }
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop()
+    }
+}
+
 
 #[cfg(test)]
 mod test;
