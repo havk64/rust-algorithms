@@ -1,5 +1,9 @@
 type Link<T> = Option<Box<Node<T>>>;
 
+pub struct Iter<'a, T> {
+    next: Option<&'a Node<T>>    
+}
+
 #[derive(Debug, PartialEq)]
 pub struct List<T> {
     head: Link<T>,
@@ -47,6 +51,10 @@ impl<T> List<T> {
     pub fn into_iter(self) -> IntoIter<T> {
         IntoIter(self)
     }
+
+    pub fn iter<'a>(&'a self) -> Iter<'a, T> {
+        Iter { next: self.head.as_deref() }
+    }
 }
 
 impl<T> Drop for List<T> {
@@ -63,6 +71,17 @@ impl<T> Iterator for IntoIter<T> {
     type Item = T;
     fn next(&mut self) -> Option<Self::Item> {
         self.0.pop()
+    }
+}
+
+impl<'a, T> Iterator for Iter<'a, T> {
+    type Item = &'a T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.next.map(|node| {
+            self.next = node.next.as_deref();
+            &node.elem
+        })
     }
 }
 
