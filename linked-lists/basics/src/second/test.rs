@@ -56,13 +56,13 @@ fn test_linked_list_i32() {
 #[test]
 fn test_create_linked_list_string() {
     let list: List<String> = List::<String>::new();
-    assert_eq!(List { head: None}, list)
+    assert_eq!(List { head: None }, list)
 }
 
 #[test]
 fn test_push_linked_list_string() {
     let mut list: List<String> = List::<String>::new();
-    assert_eq!(List { head: None}, list);
+    assert_eq!(List { head: None }, list);
 
     list.push("Hello".to_string());
     let peek = list.peek();
@@ -81,8 +81,8 @@ fn test_push_linked_list_string() {
 #[test]
 fn test_peek_mut_method() {
     let mut list: List<String> = List::<String>::new();
-    assert_eq!(List { head: None}, list);
-    
+    assert_eq!(List { head: None }, list);
+
     list.push("World".to_string());
     assert_eq!(
         List {
@@ -90,12 +90,11 @@ fn test_peek_mut_method() {
                 elem: "World".to_string(),
                 next: None,
             }))
-    },
-    list);
+        },
+        list
+    );
 
-    list.peek_mut().map(|value| {
-        *value = "Hey".to_string()
-    });
+    list.peek_mut().map(|value| *value = "Hey".to_string());
 
     assert_eq!(list.peek_mut(), Some(&mut "Hey".to_string()));
     assert_eq!(list.pop(), Some("Hey".to_string()));
@@ -117,7 +116,9 @@ fn test_into_iter() {
 #[test]
 fn iter() {
     let mut list = List::new();
-    list.push(1); list.push(2); list.push(3);
+    list.push(1);
+    list.push(2);
+    list.push(3);
 
     let mut iter = list.iter();
     assert_eq!(iter.next(), Some(&3));
@@ -128,7 +129,9 @@ fn iter() {
 #[test]
 fn test_oter_mut() {
     let mut list = List::new();
-    list.push(1); list.push(2); list.push(3);
+    list.push(1);
+    list.push(2);
+    list.push(3);
 
     let mut iter = list.iter_mut();
     assert_eq!(iter.next(), Some(&mut 3));
