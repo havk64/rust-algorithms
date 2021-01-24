@@ -18,16 +18,6 @@ impl<T> List<T> {
         List { head: None }
     }
 
-    pub fn push(&mut self, elem: T) {
-        self.head = Some(
-            Rc::new(
-                Node {
-                    elem,
-                    next: self.head.take(),
-                }
-            )
-        )
-    }
     pub fn append(&self, elem: T) -> List<T> {
         List {
             head: Some(Rc::new(Node {
