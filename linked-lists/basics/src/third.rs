@@ -42,6 +42,21 @@ impl<T> List<T> {
     }
 }
 
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut head = self.head.take();
+
+        while let Some(node) = head {
+            match Rc::try_unwrap(node) {
+                Ok(mut node) => {
+                    head = node.next.take();
+                }
+                Err(_) => break,
+            }
+        }
+    }
+}
+
 pub struct Iter<'a, T> {
     next: Option<&'a Node<T>>
 }
