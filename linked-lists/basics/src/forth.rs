@@ -32,7 +32,7 @@
      }
 
      pub fn push_front(&mut self, elem: T) {
-         let new_head = Node::new(elem);
+         let new_head: Rc<RefCell<Node<T>>> = Node::new(elem);
 
 
          match self.head.take() {
@@ -77,7 +77,7 @@
  
      #[test]
      fn basics() {
-         let mut list = List::new();
+         let mut list: List<i32> = List::new();
  
          // Check empty list behaves right
          assert_eq!(list.pop_front(), None);
