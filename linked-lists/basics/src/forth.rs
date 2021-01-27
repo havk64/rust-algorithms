@@ -1,5 +1,7 @@
- use std::rc::Rc;
- use std::cell::RefCell;
+ use std::{
+     rc::Rc,
+     cell::RefCell,
+ };
 
  pub struct List<T> {
      head: Link<T>,
